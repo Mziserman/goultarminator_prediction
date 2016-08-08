@@ -13,6 +13,7 @@ class OfficialSpider(CrawlSpider):
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-01#jt_list/',
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-03#jt_list/',
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-05#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-08#jt_list/',
     ]
 
 

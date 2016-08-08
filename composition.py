@@ -29,11 +29,11 @@ class Composition(object):
 
 
 
-		X_fit = X[+30:]
-		y_fit = y[+30:]
+		X_fit = X[+100:]
+		y_fit = y[+100:]
 
-		X_test = X[:+30]
-		y_test = y[:+30]
+		X_test = X[:+100]
+		y_test = y[:+100]
 		X_fit = np.array(X_fit)
 		y_fit = np.array(y_fit)
 		nsamples, nx, ny = X_fit.shape
