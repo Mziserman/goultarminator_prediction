@@ -84,7 +84,7 @@ class OfficialSpider(CrawlSpider):
                 for div in container.css('.ak-list-element .ak-content'):
                     name = div.css('.ak-title a strong::text').extract_first()
                     if name:
-                        print(i)
+                        pass
 
                     classe = div.css('.ak-text::text').extract_first()[:-11]
 

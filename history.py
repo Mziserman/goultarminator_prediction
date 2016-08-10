@@ -38,7 +38,7 @@ class History(object):
                 if team['name'] == team_name:
                     return team
         except TypeError:
-            print(team_name)
+            pass
 
     def get_server(self, server_name):
         for server in self.servers:
