@@ -3,7 +3,6 @@ import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.loader import ItemLoader
-from scraper.items import MatchItem as Match
 import json
 
 
@@ -14,11 +13,20 @@ class OfficialSpider(CrawlSpider):
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-03#jt_list/',
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-05#jt_list/',
         'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-08#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-10#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-11#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-12#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-13#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-14#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-15#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-16#jt_list/',
+        'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-17#jt_list/',
+        # 'http://www.dofus.com/fr/mmorpg/communaute/tournois/goultarminator/calendrier?date=2016-08-18#jt_list/',
     ]
 
 
     def parse(self, response):
-        with open('games.json') as data_file:
+        with open('allgames.json') as data_file:
             games = json.load(data_file)
             done_id = self.extract_done_id(games)
 
