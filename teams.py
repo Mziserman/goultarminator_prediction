@@ -6,18 +6,21 @@ from scrapy.http.request import Request
 import json
 import re
 
+
 class OfficialSpider(CrawlSpider):
     name = 'official'
     start_urls = []
 
-    def __init__(self, category=None):
+    def __init__(self):
         self.servers = {}
         self.done_teams = []
+        self.done_servers = []
 
     def start_requests(self):
-        with open('teams.json') as data_file:
+        with open('newteams.json') as data_file:
             servers = json.load(data_file)
             for server in servers:
+                self.done_servers.append(server['name'])
                 for team in server['teams']:
                     self.done_teams.append(team['name'])
                 # print(self.done_teams)
@@ -25,11 +28,11 @@ class OfficialSpider(CrawlSpider):
         with open('games.json') as data_file:
             games = json.load(data_file)
             for game in games:
-                if game['winner']['name'].lower() not in self.done_teams:
+                print(game['winner']['name'].lower())
+                if game['winner']['name'].lower()[:-2] not in self.done_servers and game['winner']['name'].lower() not in self.done_teams:
                     yield Request(game['winner']['url'], callback=self.parse)
-                if game['loser']['name'].lower() not in self.done_teams:
+                if game['loser']['name'].lower()[:-2] not in self.done_servers and game['loser']['name'].lower() not in self.done_teams:
                     yield Request(game['loser']['url'], callback=self.parse)
-
 
     def parse(self, response):
         yield self.create_servers(response)
@@ -79,21 +82,19 @@ class OfficialSpider(CrawlSpider):
         team['players'] = []
         i = 0
         for container in response.css('.ak-panel-content'):
-            i = i + 1
+            i += 1
             if i == 4:
                 for div in container.css('.ak-list-element .ak-content'):
                     name = div.css('.ak-title a strong::text').extract_first()
                     if name:
                         pass
 
-                    classe = div.css('.ak-text::text').extract_first()[:-11]
+                    classe = div.css('.ak-text::text').extract_first().partition(' ')[0]
 
                     if classe not in team['composition']:
                         team['composition'].append(classe)
 
-                    player = {}
-                    player['name'] = name
-                    player['classe'] = classe
+                    player = {'name': name, 'classe': classe}
                     team['players'].append(player)
 
         return team

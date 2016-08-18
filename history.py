@@ -2,7 +2,7 @@ import json
 
 class History(object):
     def __init__(self):
-        with open('games.json') as data_file:
+        with open('allgames.json') as data_file:
             self.games = json.load(data_file)
 
         with open('teams.json') as data_file:
